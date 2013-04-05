@@ -13,7 +13,7 @@ class pe_280_mcollective_fix {
 
     file { 'pe-stomp-hotfix-package':
       ensure => file,
-      path   => "/tmp/$stomp_name",
+      path   => "/tmp/${stomp_name}",
       mode   => 0644,
       owner  => 'root',
       source => $stomp_source,
@@ -23,7 +23,7 @@ class pe_280_mcollective_fix {
       name     => $stomp_name,
       ensure   => installed,
       provider => $stomp_provider,
-      source   => "/tmp/$stomp_name",
+      source   => "/tmp/${stomp_name}",
       require  => File['pe-stomp-hotfix-package'],
       notify   => Service['pe-mcollective-hotfix-service'],
     }
