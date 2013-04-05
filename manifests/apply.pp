@@ -19,5 +19,7 @@ class pe_280_mcollective_fix::apply {
         Package['pe-stomp-hotfix'],
       ],
     }
+  } else {
+    notice("Nothing for ${module_name} to do on this system -- either no PE, no MCollective, or not broken.")
   }
 }
