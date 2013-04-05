@@ -1,3 +1,21 @@
+# = Class: pe_280_mcollective_fix
+#
+# This class installs a hotfix package for Puppet Enterprise 2.8.0, then
+# restarts the pe-mcollective service. This is necessary due to a bug in 2.8.0
+# that causes MCollective and live management to not work properly. It is not
+# necessary for PE 2.8.1 or later.
+#
+# == Requires:
+#
+# The puppetlabs/stdlib module, as included by default in PE.
+#
+# == Sample usage:
+#
+# include pe_280_mcollective_fix
+#
+# Alternately, assign this class to the "default" group in the Puppet Enterprise
+# console.
+#
 class pe_280_mcollective_fix {
   # Only do things on PE 2.8.0 systems with MCollective.
   if str2bool("${::is_pe}") and $::pe_version == '2.8.0' and $::osfamily != 'windows' {
