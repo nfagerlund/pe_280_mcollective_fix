@@ -1,0 +1,10 @@
+name 'puppetlabs/pe_280_mcollective_fix'
+version '0.0.1'
+source 'git@github.com:puppetlabs/pe_280_mcollective_fix.git'
+author 'Puppet Labs'
+description 'PE 2.8.0 Live Management Hot Fix'
+summary 'PE 2.8.0 Live Management Hot Fix'
+license 'Apache2'
+project_page 'https://github.com/puppetlabs/pe_280_mcollective_fix'
+
+dependency 'puppetlabs/stdlib', '3.2.0'
