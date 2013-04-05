@@ -25,17 +25,9 @@ class pe_280_mcollective_fix {
       provider => $stomp_provider,
       source   => "/tmp/${stomp_name}",
       require  => File['pe-stomp-hotfix-package'],
-      notify   => Service['pe-mcollective-hotfix-service'],
+      notify   => Service['pe-mcollective'],
     }
 
-    service { 'pe-mcollective-hotfix-service':
-      name    => 'pe-mcollective',
-      ensure  => running,
-      require => [
-        File['pe-stomp-hotfix-package'],
-        Package['pe-stomp-hotfix'],
-      ],
-    }
   } else {
     notice("Nothing for ${module_name} to do on this system -- either no PE, no MCollective, or not broken.")
   }
