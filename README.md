@@ -59,6 +59,8 @@ The easiest way to do this is PE is to:
 
 After every node has checked in, the bug will be fully resolved, and live management and MCollective features will resume normal operation.
 
+Once you have upgraded to a later version of PE and have no remaining PE 2.8.0 nodes, you may remove the class from the console and uninstall the module with `puppet module uninstall pe_280_mcollective_fix`.
+
 ### One-Off Usage
 
 You may alternately use the `puppet apply` tool to immediately apply the `pe_280_mcollective_fix::apply` class to a single node. (This wrapper class is needed in order to properly restart the `pe-mcollective` service.)
