@@ -24,14 +24,15 @@ class pe_280_mcollective_fix {
     $stomp_source   = $pe_280_mcollective_fix::params::stomp_source
     $stomp_name     = $pe_280_mcollective_fix::params::stomp_name
     $stomp_provider = $pe_280_mcollective_fix::params::stomp_provider
-
+    $stomp_pkg      = $pe_280_mcollective_fix::params::stomp_pkg
+    
     if $stomp_source =~ /FAIL/ {
       fail("${module_name}: Something went wrong, and we couldn't find a package appropriate for this system.")
     }
 
     file { 'pe-stomp-hotfix-package':
       ensure => file,
-      path   => "/tmp/${stomp_name}",
+      path   => "/tmp/${stomp_pkg}",
       mode   => 0644,
       owner  => 'root',
       source => $stomp_source,
@@ -41,7 +42,7 @@ class pe_280_mcollective_fix {
       name     => $stomp_name,
       ensure   => installed,
       provider => $stomp_provider,
-      source   => "/tmp/${stomp_name}",
+      source   => "/tmp/${stomp_pkg}",
       require  => File['pe-stomp-hotfix-package'],
       notify   => Service['pe-mcollective'],
     }
