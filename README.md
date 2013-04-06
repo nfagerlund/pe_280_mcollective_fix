@@ -6,21 +6,21 @@
 
 #### Table of Contents
 
-1. [Overview - What is the [Modulename] module?](#overview)
+1. [Overview - What is the pe_280_mcollective_fix module?](#overview)
 
-2. [Module Description - What does the module do?](#module-description)
+2. [Description](#module-description)
 
-3. [Setup - The basics of getting started with [Modulename]](#setup)
+3. [Setup (requirements and affected subsystems)](#setup)
 
-4. [Usage - Configuration options and additional functionality](#usage)
+4. [Usage](#usage)
 
-5. [Reference - An under-the-hood peek at what is going on in the module](#reference)
+5. [Reference (available classes)](#reference)
 
-6. [Limitations - OS compatibility, etc.](#limitations)
+6. [Limitations/compatibility](#limitations)
 
 ## Overview
 
-This module is an easier way to intstall the hotfix packages for Puppet Enterprise 2.8.0's stomp gem bug. It's only necessary if you're running PE 2.8.0; all later versions are exempt, and this module will have no effect on them.
+This module is an easier way to install the hotfix packages for Puppet Enterprise 2.8.0's stomp gem bug. It's only necessary if you're running PE 2.8.0; all later versions are exempt, and this module will have no effect on them.
 
 ## Module Description
 
@@ -51,7 +51,7 @@ It expects that affected nodes are running the `pe-mcollective` service, which i
 
 Assign the class `pe_280_mcollective_fix` to every node in your infrastructure. It will either fix the PE 2.8.0 MCollective problems or have no effect, depending on whether the node is affected by the problem.
 
-The easiest way to do this is PE is to:
+The easiest way to do this in PE is to:
 
 * [Add the class to the Puppet Enterprise console][add_class]
 * [Assign the class to the console's "default" group][assign_class]
