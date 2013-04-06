@@ -1,5 +1,5 @@
 name 'puppetlabs/pe_280_mcollective_fix'
-version '0.0.1'
+version '0.0.2'
 source 'git@github.com:puppetlabs/pe_280_mcollective_fix.git'
 author 'Puppet Labs'
 description 'PE 2.8.0 Live Management Hot Fix'
