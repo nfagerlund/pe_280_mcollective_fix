@@ -46,7 +46,8 @@ class pe_280_mcollective_fix::params {
         'sparc'  => 'pup-stomp-1.2.3-1.1.9.sparc.pkg.gz',
         default  => 'FAIL',
       }
-      $stomp_source = "${source_base}/solaris/${stomp_name}"
+      $stomp_pkg    = $stomp_name
+      $stomp_source = "${source_base}/solaris/${stomp_pkg}"
     }
     'aix': {
       $stomp_provider = 'rpm'
