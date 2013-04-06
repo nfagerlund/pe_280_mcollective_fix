@@ -7,4 +7,4 @@ summary 'PE 2.8.0 Live Management Hot Fix'
 license 'Apache2'
 project_page 'https://github.com/puppetlabs/pe_280_mcollective_fix'
 
-dependency 'puppetlabs/stdlib', '>= 3.2.0'
+dependency 'puppetlabs/stdlib', '>= 2.5.1'
