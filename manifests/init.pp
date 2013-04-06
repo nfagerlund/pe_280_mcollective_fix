@@ -66,6 +66,29 @@ class pe_280_mcollective_fix {
       }
     }
 
+    if $::osfamily == 'redhat' or $::osfamily == 'suse' {
+      # Package dependency problems -- got to install the doc package on redhat and suse
+      $stomp_doc_name = $pe_280_mcollective_fix::params::stomp_doc_name
+      $stomp_doc_pkg = $pe_280_mcollective_fix::params::stomp_doc_pkg
+      $stomp_doc_source = $pe_280_mcollective_fix::params::stomp_doc_source
+
+      file { 'pe-stomp-doc-hotfix-package':
+        ensure => file,
+        path   => "/tmp/${stomp_doc_pkg}",
+        mode   => 0644,
+        owner  => 'root',
+        source => $stomp_doc_source,
+      }
+      package { 'pe-stomp-doc-hotfix':
+        name     => $stomp_doc_name,
+        ensure   => latest,
+        provider => $stomp_provider,
+        source   => "/tmp/${stomp_doc_pkg}",
+        require  => File['pe-stomp-doc-hotfix-package'],
+      }
+
+    }
+
   } else {
     notice("Nothing for ${module_name} to do on this system -- either no PE, no MCollective, or not broken.")
   }
