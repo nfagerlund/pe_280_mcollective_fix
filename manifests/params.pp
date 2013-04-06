@@ -9,18 +9,18 @@ class pe_280_mcollective_fix::params {
   case $::osfamily {
     'redhat': {
       $stomp_provider = 'rpm'
-      $stomp_name = $::operatingsystemrelease ? {
-        /^5/    => 'pe-rubygem-stomp-1.2.3-1.1.9.pe.el5.noarch',
-        /^6/    => 'pe-rubygem-stomp-1.2.3-1.1.9.pe.el6.noarch',
+      $stomp_name     = 'pe-rubygem-stomp'
+      $stomp_pkg      = $::operatingsystemrelease ? {
+        /^5/    => 'pe-rubygem-stomp-1.2.3-1.1.9.pe.el5.noarch.rpm',
+        /^6/    => 'pe-rubygem-stomp-1.2.3-1.1.9.pe.el6.noarch.rpm',
         default => 'FAIL',
       }
-      $stomp_pkg    = "${stomp_name}.rpm"
       $stomp_source = "${source_base}/el/${stomp_pkg}"
 
     }
     'suse': {
       $stomp_provider = 'rpm'
-      $stomp_name     = 'pe-rubygem-stomp-1.2.3-1.1.9.pe.noarch'
+      $stomp_name     = 'pe-rubygem-stomp'
       $stomp_pkg      = 'pe-rubygem-stomp-1.2.3-1.1.9.pe.noarch.rpm'
       $stomp_source   = "${source_base}/sles/${stomp_pkg}"
     }
