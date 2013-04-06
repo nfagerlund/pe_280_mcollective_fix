@@ -67,24 +67,13 @@ class pe_280_mcollective_fix {
     }
 
     if $::osfamily == 'redhat' or $::osfamily == 'suse' {
-      # Package dependency problems -- got to install the doc package on redhat and suse
-      $stomp_doc_name = $pe_280_mcollective_fix::params::stomp_doc_name
-      $stomp_doc_pkg = $pe_280_mcollective_fix::params::stomp_doc_pkg
-      $stomp_doc_source = $pe_280_mcollective_fix::params::stomp_doc_source
-
-      file { 'pe-stomp-doc-hotfix-package':
-        ensure => file,
-        path   => "/tmp/${stomp_doc_pkg}",
-        mode   => 0644,
-        owner  => 'root',
-        source => $stomp_doc_source,
-      }
-      package { 'pe-stomp-doc-hotfix':
-        name     => $stomp_doc_name,
-        ensure   => latest,
+      # Package dependency problems -- got to uninstall the doc package on redhat and suse.
+      # This package is unnecessary, and was included in the install as an oversight.
+      # If it isn't uninstalled, we get a dependency cycle when we try to upgrade the stomp gem.
+      package { 'pe-rubygem-stomp-doc':
+        ensure   => absent,
         provider => $stomp_provider,
-        source   => "/tmp/${stomp_doc_pkg}",
-        require  => File['pe-stomp-doc-hotfix-package'],
+        before   => Package['pe-stomp-hotfix'],
       }
 
     }

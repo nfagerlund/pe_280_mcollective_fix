@@ -17,20 +17,12 @@ class pe_280_mcollective_fix::params {
       }
       $stomp_pkg = "pe-rubygem-stomp-1.2.3-1.1.9.pe.el${majorversion}.noarch.rpm"
       $stomp_source = "${source_base}/el/${stomp_pkg}"
-
-      $stomp_doc_name = 'pe-rubygem-stomp-doc'
-      $stomp_doc_pkg = "pe-rubygem-stomp-doc-1.2.3-1.1.9.pe.el${majorversion}.noarch.rpm"
-      $stomp_doc_source = "${source_base}/el/${stomp_doc_pkg}"
     }
     'suse': {
       $stomp_provider = 'rpm'
       $stomp_name     = 'pe-rubygem-stomp'
       $stomp_pkg      = 'pe-rubygem-stomp-1.2.3-1.1.9.pe.noarch.rpm'
       $stomp_source   = "${source_base}/sles/${stomp_pkg}"
-
-      $stomp_doc_name     = 'pe-rubygem-stomp-doc'
-      $stomp_doc_pkg      = 'pe-rubygem-stomp-doc-1.2.3-1.1.9.pe.noarch.rpm'
-      $stomp_doc_source   = "${source_base}/sles/${stomp_doc_pkg}"
     }
     'debian': {
       $stomp_provider = 'dpkg'
