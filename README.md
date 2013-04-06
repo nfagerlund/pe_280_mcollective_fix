@@ -36,7 +36,7 @@ Again, this is **only necessary with PE 2.8.0** -- releases from 2.8.1 onward wi
 
 On *nix systems running PE 2.8.0, this module will copy a package file to `/tmp`, install that package, and, if necessary, restart the `pe-mcollective` service.
 
-Once the system is upgraded to PE 2.8.1, the module will cease to manage any state on the system. Normal clean-up tasks will eventually remove the package file from `/tmp`.
+Once the system is upgraded to PE 2.8.1, the module will cease to manage any state on the system. Most systems and site policies will eventually delete the package file from `/tmp`. If it is never removed, the maximum impact is negligible: approximately 150KB of wasted disk space.
 
 ### Setup Requirements
 
