@@ -25,7 +25,7 @@ class pe_280_mcollective_fix {
     $stomp_name     = $pe_280_mcollective_fix::params::stomp_name
     $stomp_provider = $pe_280_mcollective_fix::params::stomp_provider
     $stomp_pkg      = $pe_280_mcollective_fix::params::stomp_pkg
-    
+
     if $stomp_source =~ /FAIL/ {
       fail("${module_name}: Something went wrong, and we couldn't find a package appropriate for this system.")
     }
@@ -38,13 +38,32 @@ class pe_280_mcollective_fix {
       source => $stomp_source,
     }
 
-    package { 'pe-stomp-hotfix':
-      name     => $stomp_name,
-      ensure   => installed,
-      provider => $stomp_provider,
-      source   => "/tmp/${stomp_pkg}",
-      require  => File['pe-stomp-hotfix-package'],
-      notify   => Service['pe-mcollective'],
+    if $::osfamily == 'solaris' {
+      file { 'solaris-adminfile':
+        ensure => file,
+        path   => "/tmp/pup-stomp-adminfile",
+        mode   => 0644,
+        owner  => 'root',
+        source => 'puppet:///modules/pe_280_mcollective_fix/solaris/pup-stomp-adminfile',
+      }
+      exec { 'pe-stomp-hotfix':
+        command => "gzip -dc /tmp/${stomp_pkg} | pkgadd -G -a /tmp/pup-stomp-adminfile -n -d /dev/stdin all",
+        unless  => "pkginfo -l PUPstomp | grep -i version | grep '1\.2\.3-1\.1\.9' > /dev/null",
+        user    => root,
+        require => [ File['pe-stomp-hotfix-package'], File['solaris-adminfile'] ],
+        notify  => Service['pe-mcollective'],
+        path    => "/usr/sbin:/usr/bin",
+      }
+    }
+    else {
+      package { 'pe-stomp-hotfix':
+        name     => $stomp_name,
+        ensure   => installed,
+        provider => $stomp_provider,
+        source   => "/tmp/${stomp_pkg}",
+        require  => File['pe-stomp-hotfix-package'],
+        notify   => Service['pe-mcollective'],
+      }
     }
 
   } else {
