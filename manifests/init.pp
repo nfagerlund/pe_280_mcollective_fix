@@ -60,7 +60,7 @@ class pe_280_mcollective_fix {
     else {
       package { 'pe-stomp-hotfix':
         name     => $stomp_name,
-        ensure   => latest,
+        ensure   => $stomp_ensure,
         provider => $stomp_provider,
         source   => "/tmp/${stomp_pkg}",
         require  => File['pe-stomp-hotfix-package'],

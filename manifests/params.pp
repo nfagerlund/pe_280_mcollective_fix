@@ -17,12 +17,14 @@ class pe_280_mcollective_fix::params {
       }
       $stomp_pkg = "pe-rubygem-stomp-1.2.3-1.1.9.pe.el${majorversion}.noarch.rpm"
       $stomp_source = "${source_base}/el/${stomp_pkg}"
+      $stomp_ensure = "1.2.3-1.1.9.pe.el${majorversion}"
     }
     'suse': {
       $stomp_provider = 'rpm'
       $stomp_name     = 'pe-rubygem-stomp'
       $stomp_pkg      = 'pe-rubygem-stomp-1.2.3-1.1.9.pe.noarch.rpm'
       $stomp_source   = "${source_base}/sles/${stomp_pkg}"
+      $stomp_ensure   = '1.2.3-1.1.9.pe'
     }
     'debian': {
       $stomp_provider = 'dpkg'
@@ -38,6 +40,7 @@ class pe_280_mcollective_fix::params {
       }
 
       $stomp_source = "${source_base}/${packagedir}/${stomp_pkg}"
+      $stomp_ensure = 'latest'
     }
     'solaris': {
       $stomp_provider = 'sun'
@@ -59,6 +62,7 @@ class pe_280_mcollective_fix::params {
         default => 'FAIL'
       }
       $stomp_source = "${source_base}/aix/${stomp_pkg}"
+      $stomp_ensure = 'latest'
     }
     default: {
       $stomp_source = 'FAIL'
