@@ -27,14 +27,14 @@ class pe_280_mcollective_fix::params {
     'debian': {
       $stomp_provider = 'dpkg'
       $stomp_name     = 'pe-rubygem-stomp'
-      $stomp_pkg    = 'pe-rubygem-stomp_1.2.3-1puppet1.1.9_all.deb'
-      $packagedir = $::operatingsystem ? {
-        'debian'    => 'debian/squeeze',
-        'ubuntu'    => $::operatingsystemrelease ? {
+      $stomp_pkg      = 'pe-rubygem-stomp_1.2.3-1puppet1.1.9_all.deb'
+      $packagedir     = $::operatingsystem ? {
+        'debian' => 'debian/squeeze',
+        'ubuntu' => $::operatingsystemrelease ? {
           /^12\.04/ => 'ubuntu/precise',
           /^10\.04/ => 'ubuntu/lucid',
         },
-        default     => 'FAIL',
+        default  => 'FAIL',
       }
 
       $stomp_source = "${source_base}/${packagedir}/${stomp_pkg}"
