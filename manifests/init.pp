@@ -46,8 +46,10 @@ class pe_280_mcollective_fix {
         owner  => 'root',
         source => 'puppet:///modules/pe_280_mcollective_fix/solaris/pup-stomp-adminfile',
       }
+      # Solaris can't upgrade packages, so uninstall the old one and install the
+      # new in a single step.
       exec { 'pe-stomp-hotfix':
-        command => "gzip -dc /tmp/${stomp_pkg} | pkgadd -G -a /tmp/pup-stomp-adminfile -n -d /dev/stdin all",
+        command => "pkgrm -n -a /tmp/pup-stomp-adminfile PUPstomp; gzip -dc /tmp/${stomp_pkg} | pkgadd -G -a /tmp/pup-stomp-adminfile -n -d /dev/stdin all",
         unless  => "pkginfo -l PUPstomp | grep -i version | grep '1\.2\.3-1\.1\.9' > /dev/null",
         user    => root,
         require => [ File['pe-stomp-hotfix-package'], File['solaris-adminfile'] ],
