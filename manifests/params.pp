@@ -51,12 +51,13 @@ class pe_280_mcollective_fix::params {
     'aix': {
       $stomp_provider = 'rpm'
       $stomp_name = $::operatingsystemrelease ? { # formatted like 7300-XX-X.......
-        /^5/ => 'pe-rubygem-stomp-1.2.3-1.1.9.pe.aix5.3.noarch.rpm',
-        /^6/ => 'pe-rubygem-stomp-1.2.3-1.1.9.pe.aix6.1.noarch.rpm',
-        /^7/ => 'pe-rubygem-stomp-1.2.3-1.1.9.pe.aix7.1.noarch.rpm',
+        /^5/ => 'pe-rubygem-stomp-1.2.3-1.1.9.pe.aix5.3.noarch',
+        /^6/ => 'pe-rubygem-stomp-1.2.3-1.1.9.pe.aix6.1.noarch',
+        /^7/ => 'pe-rubygem-stomp-1.2.3-1.1.9.pe.aix7.1.noarch',
         default => 'FAIL'
       }
-      $stomp_source = "${source_base}/aix/${stomp_name}"
+      $stomp_pkg = "${stomp_name}.rpm"
+      $stomp_source = "${source_base}/aix/${stomp_pkg}"
     }
     default: {
       $stomp_source = 'FAIL'
